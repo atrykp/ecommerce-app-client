@@ -2,7 +2,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
-interface IProduct {
+export interface IProduct {
   product: {
     _id: string;
     name: string;
@@ -35,7 +35,6 @@ const Product = ({ product }: IProduct) => {
             text={`${product.numReviews} ${
               product.numReviews === 1 ? "review" : "reviews"
             }`}
-            color={"orange"}
           />
         </Card.Text>
         <Card.Text as="h3">${product.price}</Card.Text>

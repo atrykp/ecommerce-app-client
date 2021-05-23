@@ -38,6 +38,6 @@ const Rating = (props: IRating) => {
 };
 
 Rating.defaultProps = {
-  color: "blue",
+  color: "orange",
 };
 export default Rating;

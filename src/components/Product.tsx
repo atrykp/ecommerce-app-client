@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import products from "../products";
+import Rating from "./Rating";
 
 interface IProduct {
   product: {
@@ -29,10 +29,13 @@ const Product = ({ product }: IProduct) => {
           </Card.Title>
         </a>
         <Card.Text as="div">
-          {" "}
-          <div className="my-3">
-            {product.rating} from {product.numReviews} reviews
-          </div>
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} ${
+              product.numReviews === 1 ? "review" : "reviews"
+            }`}
+            color={"orange"}
+          />
         </Card.Text>
         <Card.Text as="h3">${product.price}</Card.Text>
       </Card.Body>

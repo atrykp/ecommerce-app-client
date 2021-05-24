@@ -1,20 +1,10 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ProductItem } from "../screens/HomeScreen";
 import Rating from "./Rating";
 
 export interface IProduct {
-  product: {
-    _id: string;
-    name: string;
-    image: string;
-    description: string;
-    brand: string;
-    category: string;
-    price: number;
-    countInStock: number;
-    rating: number;
-    numReviews: number;
-  };
+  product: ProductItem;
 }
 
 const Product = ({ product }: IProduct) => {

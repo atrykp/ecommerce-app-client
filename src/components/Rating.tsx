@@ -1,5 +1,5 @@
 interface IRating {
-  value: number;
+  value?: number;
   text: string;
   color?: string;
 }
@@ -10,7 +10,7 @@ const Rating = (props: IRating) => {
   const { value, text, color } = props;
   arr = [];
   for (let i = 0; i < 5; i++) {
-    const currentValue = value - i;
+    const currentValue = value! - i;
 
     const element = (
       <span key={Math.random().toString()}>

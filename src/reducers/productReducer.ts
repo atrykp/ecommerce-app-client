@@ -1,14 +1,16 @@
 import { ProductItem } from "../screens/HomeScreen";
 import { ActionType } from "../actions/actionTypes";
+import { Action } from "../actions/actions";
 
-interface IProductList {
+export interface IProductList {
   products: ProductItem[];
   loading: boolean;
+  error?: string;
 }
 
 export const productListReducer = (
   state: IProductList = { products: [], loading: false },
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
     case ActionType.PRODUCT_LIST_REQUEST:

@@ -1,3 +1,4 @@
+import { CartItem } from "../reducers/cartReducer";
 import { ProductItem } from "../screens/HomeScreen";
 import { ActionType } from "./actionTypes";
 
@@ -24,10 +25,17 @@ export interface ProductDetailsFailAction {
   type: ActionType.PRODUCT_DETAILS_FAIL;
   payload: Error;
 }
+
+export interface AddProductToCart {
+  type: ActionType.CART_ADD_ITEM;
+  payload: CartItem;
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
   | ProductListFailAction
   | ProductDetailsRequestAction
   | ProductDetailsSuccessAction
-  | ProductDetailsFailAction;
+  | ProductDetailsFailAction
+  | AddProductToCart;

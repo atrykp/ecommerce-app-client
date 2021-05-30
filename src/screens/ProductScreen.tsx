@@ -24,7 +24,7 @@ interface MatchParams {
 interface Props extends RouteComponentProps<MatchParams> {}
 
 const ProductScreen = ({ history, match }: Props) => {
-  const [qty, setQty] = useState("");
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const ProductScreen = ({ history, match }: Props) => {
   }, [dispatch, match]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?${qty}`);
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
   return (
@@ -94,7 +94,7 @@ const ProductScreen = ({ history, match }: Props) => {
                   </Row>
                 </ListGroup.Item>
 
-                {product!.countInStock > 0 && (
+                {product && product.countInStock > 0 && (
                   <ListGroup.Item>
                     <Row>
                       <Col>Qty</Col>
@@ -104,7 +104,7 @@ const ProductScreen = ({ history, match }: Props) => {
                           value={qty}
                           onChange={(
                             event: React.ChangeEvent<HTMLInputElement>
-                          ) => setQty(event.target.value)}
+                          ) => setQty(+event.target.value)}
                         >
                           {product &&
                             [...Array(product.countInStock).keys()].map((x) => (

@@ -30,6 +30,10 @@ export interface AddProductToCart {
   type: ActionType.CART_ADD_ITEM;
   payload: CartItem;
 }
+export interface RemoveProductFromCart {
+  type: ActionType.CART_REMOVE_ITEM;
+  payload: string;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -38,4 +42,5 @@ export type Action =
   | ProductDetailsRequestAction
   | ProductDetailsSuccessAction
   | ProductDetailsFailAction
-  | AddProductToCart;
+  | AddProductToCart
+  | RemoveProductFromCart;

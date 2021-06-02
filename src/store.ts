@@ -8,13 +8,13 @@ import {
   productListReducer,
 } from "./reducers/productReducer";
 import { cartReducer, ICartState } from "./reducers/cartReducer";
-import { IUser, userLoginReducer } from "./reducers/userReducers";
+import { IUserState, userLoginReducer } from "./reducers/userReducers";
 
 export interface RootState {
   productList: IProductList;
   productDetails: IProductDetails;
   cart: ICartState;
-  userLogin: IUser;
+  userLogin: IUserState;
 }
 
 const reducer = combineReducers({

@@ -10,7 +10,16 @@ export interface IUser {
   password?: string;
 }
 
-export const userLoginReducer = (state: IUser | {} = {}, action: Action) => {
+export interface IUserState {
+  loading: boolean;
+  userInfo: IUser;
+  error: Error;
+}
+
+export const userLoginReducer = (
+  state: IUserState | {} = {},
+  action: Action
+) => {
   switch (action.type) {
     case ActionType.USER_LOGIN_REQUEST:
       return { loading: true };

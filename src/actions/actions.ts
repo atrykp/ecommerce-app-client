@@ -1,5 +1,6 @@
 import { CartItem } from "../reducers/cartReducer";
 import { ProductItem } from "../screens/HomeScreen";
+import { IUser } from "../reducers/userReducers";
 import { ActionType } from "./actionTypes";
 
 export interface ProductListRequestAction {
@@ -35,6 +36,23 @@ export interface RemoveProductFromCart {
   payload: string;
 }
 
+export interface UserLoginRequestAction {
+  type: ActionType.USER_LOGIN_REQUEST;
+}
+export interface UserLoginSuccessAction {
+  type: ActionType.USER_LOGIN_SUCCESS;
+  payload: IUser;
+}
+export interface UserLoginFailAction {
+  type: ActionType.USER_LOGIN_FAIL;
+  payload: Error;
+}
+
+export interface UserLogoutAction {
+  type: ActionType.USER_LOGOUT;
+  payload: {};
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
@@ -43,4 +61,8 @@ export type Action =
   | ProductDetailsSuccessAction
   | ProductDetailsFailAction
   | AddProductToCart
-  | RemoveProductFromCart;
+  | RemoveProductFromCart
+  | UserLoginRequestAction
+  | UserLoginSuccessAction
+  | UserLoginFailAction
+  | UserLogoutAction;

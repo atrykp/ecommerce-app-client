@@ -35,3 +35,8 @@ export const login =
       });
     }
   };
+
+export const logout = () => (dispatch: Dispatch<Action>) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: ActionType.USER_LOGOUT, payload: {} });
+};

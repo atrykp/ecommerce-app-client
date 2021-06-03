@@ -8,13 +8,18 @@ import {
   productListReducer,
 } from "./reducers/productReducer";
 import { cartReducer, ICartState } from "./reducers/cartReducer";
-import { IUserState, userLoginReducer } from "./reducers/userReducers";
+import {
+  IUserState,
+  userLoginReducer,
+  userRegisterReducer,
+} from "./reducers/userReducers";
 
 export interface RootState {
   productList: IProductList;
   productDetails: IProductDetails;
   cart: ICartState;
   userLogin: IUserState;
+  userRegister: IUserState;
 }
 
 const reducer = combineReducers({
@@ -22,6 +27,7 @@ const reducer = combineReducers({
   productDetails: productDetailsReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

@@ -49,3 +49,23 @@ export const userRegisterReducer = (
       return state;
   }
 };
+
+export interface IUserDetailState {
+  user: IUserState | {};
+}
+
+export const userDetailsReducer = (
+  state: IUserDetailState = { user: {} },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.USER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case ActionType.USER_DETAILS_SUCCESS:
+      return { loading: false, userInfo: action.payload };
+    case ActionType.USER_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

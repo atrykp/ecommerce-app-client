@@ -64,6 +64,17 @@ export interface UserRegisterFailAction {
   type: ActionType.USER_REGISTER_FAIL;
   payload: Error;
 }
+export interface UserDetailsRequestAction {
+  type: ActionType.USER_DETAILS_REQUEST;
+}
+export interface UserDetailsSuccessAction {
+  type: ActionType.USER_DETAILS_SUCCESS;
+  payload: IUser;
+}
+export interface UserReDetailsFailAction {
+  type: ActionType.USER_DETAILS_FAIL;
+  payload: Error;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -80,4 +91,7 @@ export type Action =
   | UserLogoutAction
   | UserRegisterRequestAction
   | UserRegisterSuccessAction
-  | UserRegisterFailAction;
+  | UserRegisterFailAction
+  | UserDetailsRequestAction
+  | UserDetailsSuccessAction
+  | UserReDetailsFailAction;

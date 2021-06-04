@@ -98,10 +98,12 @@ export const getUserDetails =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+
       const { data } = await axios.get(
         `http://localhost:5000/api/users/${id}`,
         config
       );
+
       dispatch({
         type: ActionType.USER_DETAILS_SUCCESS,
         payload: data,

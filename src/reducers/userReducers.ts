@@ -51,18 +51,29 @@ export const userRegisterReducer = (
 };
 
 export interface IUserDetailState {
-  user: IUserState | {};
+  user: IUser;
+  loading?: boolean;
+  error?: Error;
 }
 
 export const userDetailsReducer = (
-  state: IUserDetailState = { user: {} },
+  state: IUserDetailState = {
+    user: {
+      _id: "",
+      name: "",
+      email: "",
+      isAdmin: false,
+      token: "",
+      password: "",
+    },
+  },
   action: Action
 ) => {
   switch (action.type) {
     case ActionType.USER_DETAILS_REQUEST:
       return { ...state, loading: true };
     case ActionType.USER_DETAILS_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, user: action.payload };
     case ActionType.USER_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     default:

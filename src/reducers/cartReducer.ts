@@ -9,13 +9,23 @@ export interface CartItem {
   countInStock: number;
   qty: number;
 }
+export interface IShippingAddress {
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
 
 export interface ICartState {
   cartItems: CartItem[];
+  shippingAddress: IShippingAddress;
 }
 
 export const cartReducer = (
-  state: ICartState = { cartItems: [] },
+  state: ICartState = {
+    cartItems: [],
+    shippingAddress: { address: "", city: "", postalCode: "", country: "" },
+  },
   action: Action
 ) => {
   switch (action.type) {
@@ -44,6 +54,11 @@ export const cartReducer = (
         cartItems: state.cartItems.filter(
           (item) => item.product !== action.payload
         ),
+      };
+    case ActionType.CART_SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: action.payload,
       };
     default:
       return state;

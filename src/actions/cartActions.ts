@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
+import { IShippingAddress } from "../reducers/cartReducer";
 import { RootState } from "../store";
 
 import { Action } from "./actions";
@@ -40,4 +41,14 @@ export const removeFromCart =
       "cartItems",
       JSON.stringify(getState().cart.cartItems)
     );
+  };
+
+export const saveShippingAddress =
+  (data: IShippingAddress) => (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CART_SAVE_SHIPPING_ADDRESS,
+      payload: data,
+    });
+
+    localStorage.setItem("shippingAddress", JSON.stringify(data));
   };

@@ -1,4 +1,4 @@
-import { CartItem } from "../reducers/cartReducer";
+import { CartItem, IShippingAddress } from "../reducers/cartReducer";
 import { ProductItem } from "../screens/HomeScreen";
 import { IUser } from "../reducers/userReducers";
 import { ActionType } from "./actionTypes";
@@ -34,6 +34,10 @@ export interface AddProductToCart {
 export interface RemoveProductFromCart {
   type: ActionType.CART_REMOVE_ITEM;
   payload: string;
+}
+export interface SaveShippingAddressCart {
+  type: ActionType.CART_SAVE_SHIPPING_ADDRESS;
+  payload: IShippingAddress;
 }
 
 export interface UserLoginRequestAction {
@@ -101,6 +105,7 @@ export type Action =
   | ProductDetailsFailAction
   | AddProductToCart
   | RemoveProductFromCart
+  | SaveShippingAddressCart
   | UserLoginRequestAction
   | UserLoginSuccessAction
   | UserLoginFailAction

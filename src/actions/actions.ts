@@ -75,6 +75,22 @@ export interface UserReDetailsFailAction {
   type: ActionType.USER_DETAILS_FAIL;
   payload: Error;
 }
+export interface UserUpdateRequestAction {
+  type: ActionType.USER_UPDATE_PROFILE_REQUEST;
+}
+export interface UserUpdateSuccessAction {
+  type: ActionType.USER_UPDATE_PROFILE_SUCCESS;
+  payload: IUser;
+}
+export interface UserUpdateFailAction {
+  type: ActionType.USER_UPDATE_PROFILE_FAIL;
+  payload: Error;
+}
+
+export interface UserUpdateResetAction {
+  type: ActionType.USER_UPDATE_PROFILE_RESET;
+  payload: Error;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -94,4 +110,8 @@ export type Action =
   | UserRegisterFailAction
   | UserDetailsRequestAction
   | UserDetailsSuccessAction
-  | UserReDetailsFailAction;
+  | UserReDetailsFailAction
+  | UserUpdateRequestAction
+  | UserUpdateSuccessAction
+  | UserUpdateFailAction
+  | UserUpdateResetAction;

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import { getUserDetails } from "../actions/userActions";
+import { ActionType } from "../actions/actionTypes";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { RootState } from "../store";
@@ -21,24 +22,31 @@ const ProfileScreen = ({ location, history }: RouteComponentProps) => {
   const userLogin = useSelector((state: RootState) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state: RootState) => state.userUpdate);
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user.name) {
+      if (!user.name || !user || success) {
+        dispatch({ type: ActionType.USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
+      dispatch(
+        updateUserProfile({ userInfo: { id: user._id, name, email, password } })
+      );
     }
   };
 
@@ -48,6 +56,7 @@ const ProfileScreen = ({ location, history }: RouteComponentProps) => {
         <h2>User Profile</h2>
         {message && <Message variant="danger">{message}</Message>}
         {error && <Message variant="danger">{error}</Message>}
+        {success && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">

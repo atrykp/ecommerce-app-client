@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "react";
+import { IUpdateProfile } from "../reducers/userReducers";
 import { RootState } from "../store";
 import { Action } from "./actions";
 import { ActionType } from "./actionTypes";
@@ -111,6 +112,52 @@ export const getUserDetails =
     } catch (error) {
       dispatch({
         type: ActionType.USER_DETAILS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+export const updateUserProfile =
+  (user: IUpdateProfile) =>
+  async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    try {
+      dispatch({
+        type: ActionType.USER_UPDATE_PROFILE_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `http://localhost:5000/api/users/profile`,
+        user.userInfo,
+        config
+      );
+
+      dispatch({
+        type: ActionType.USER_UPDATE_PROFILE_SUCCESS,
+        payload: data,
+      });
+
+      dispatch({
+        type: ActionType.USER_LOGIN_SUCCESS,
+        payload: data,
+      });
+
+      localStorage.setItem("userInfo", JSON.stringify(data));
+    } catch (error) {
+      dispatch({
+        type: ActionType.USER_UPDATE_PROFILE_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

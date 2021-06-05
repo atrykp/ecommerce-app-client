@@ -80,3 +80,39 @@ export const userDetailsReducer = (
       return state;
   }
 };
+
+export interface IUpdateProfile {
+  success?: boolean;
+  userInfo: {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+  };
+}
+export const userUpdateProfileReducer = (
+  state: IUpdateProfile = {
+    success: false,
+    userInfo: {
+      id: "",
+      name: "",
+      email: "",
+      password: "",
+    },
+  },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.USER_UPDATE_PROFILE_REQUEST:
+      return { loading: true };
+    case ActionType.USER_UPDATE_PROFILE_SUCCESS:
+      return { loading: false, success: true, userInfo: action.payload };
+    case ActionType.USER_UPDATE_PROFILE_FAIL:
+      return { loading: false, error: action.payload };
+
+    case ActionType.USER_UPDATE_PROFILE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};

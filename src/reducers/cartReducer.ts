@@ -19,12 +19,14 @@ export interface IShippingAddress {
 export interface ICartState {
   cartItems: CartItem[];
   shippingAddress: IShippingAddress;
+  paymentMethod: string;
 }
 
 export const cartReducer = (
   state: ICartState = {
     cartItems: [],
     shippingAddress: { address: "", city: "", postalCode: "", country: "" },
+    paymentMethod: "",
   },
   action: Action
 ) => {

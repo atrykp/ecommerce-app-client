@@ -95,6 +95,10 @@ export interface UserUpdateResetAction {
   type: ActionType.USER_UPDATE_PROFILE_RESET;
   payload: Error;
 }
+export interface SavePaymentMethodAction {
+  type: ActionType.CART_SAVE_PAYMENT_METHOD;
+  payload: string;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -119,4 +123,5 @@ export type Action =
   | UserUpdateRequestAction
   | UserUpdateSuccessAction
   | UserUpdateFailAction
-  | UserUpdateResetAction;
+  | UserUpdateResetAction
+  | SavePaymentMethodAction;

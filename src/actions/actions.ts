@@ -2,6 +2,7 @@ import { CartItem, IShippingAddress } from "../reducers/cartReducer";
 import { ProductItem } from "../screens/HomeScreen";
 import { IUser } from "../reducers/userReducers";
 import { ActionType } from "./actionTypes";
+import { IOrder } from "../reducers/orderReducer";
 
 export interface ProductListRequestAction {
   type: ActionType.PRODUCT_LIST_REQUEST;
@@ -100,6 +101,19 @@ export interface SavePaymentMethodAction {
   payload: string;
 }
 
+export interface OrderCreaterRequestAction {
+  type: ActionType.ORDER_CREATE_REQUEST;
+}
+export interface OrderCreaterSuccessAction {
+  type: ActionType.ORDER_CREATE_SUCCESS;
+  payload: IOrder;
+}
+
+export interface OrderCreaterFailAction {
+  type: ActionType.ORDER_CREATE_FAIL;
+  payload: Error;
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
@@ -124,4 +138,7 @@ export type Action =
   | UserUpdateSuccessAction
   | UserUpdateFailAction
   | UserUpdateResetAction
-  | SavePaymentMethodAction;
+  | SavePaymentMethodAction
+  | OrderCreaterRequestAction
+  | OrderCreaterSuccessAction
+  | OrderCreaterFailAction;

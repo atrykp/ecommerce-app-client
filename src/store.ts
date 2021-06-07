@@ -17,6 +17,7 @@ import {
   userRegisterReducer,
   userUpdateProfileReducer,
 } from "./reducers/userReducers";
+import { IOrderReducer, orderReducer } from "./reducers/orderReducer";
 
 export interface RootState {
   productList: IProductList;
@@ -26,6 +27,7 @@ export interface RootState {
   userRegister: IUserState;
   userDetails: IUserDetailState;
   userUpdate: IUpdateProfile;
+  order: IOrderReducer;
 }
 
 const reducer = combineReducers({
@@ -36,6 +38,7 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdate: userUpdateProfileReducer,
+  order: orderReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

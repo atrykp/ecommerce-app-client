@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
 import { RootState } from "../store";
@@ -15,7 +16,7 @@ const prices = {
 
 const PlaceOrderScreen = () => {
   const cart = useSelector((state: RootState) => state.cart);
-
+  const dispatch = useDispatch();
   const addDecimals = (num: number) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
@@ -34,7 +35,17 @@ const PlaceOrderScreen = () => {
   );
 
   const placeOrderHandler = () => {
-    console.log("order");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: prices.itemsPrice,
+        shippingPrice: prices.shippingPrice,
+        taxPrice: prices.taxPrice,
+        totalPrice: prices.totalPrice,
+      })
+    );
   };
 
   return (

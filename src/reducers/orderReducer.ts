@@ -3,6 +3,7 @@ import { ActionType } from "../actions/actionTypes";
 import { CartItem, IShippingAddress } from "./cartReducer";
 
 export interface IOrder {
+  _id?: string;
   orderItems: CartItem[];
   shippingAddress: IShippingAddress;
   paymentMethod: string;
@@ -22,6 +23,7 @@ export interface IOrderReducer {
 export const orderReducer = (
   state: IOrderReducer = {
     order: {
+      _id: "",
       orderItems: [],
       shippingAddress: { address: "", city: "", postalCode: "", country: "" },
       paymentMethod: "",

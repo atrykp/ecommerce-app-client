@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import Message from "../components/Message";
@@ -14,7 +14,7 @@ const prices = {
   totalPrice: 0,
 };
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }: RouteComponentProps) => {
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const addDecimals = (num: number) => {
@@ -33,6 +33,16 @@ const PlaceOrderScreen = () => {
   prices.totalPrice = Number(
     prices.itemsPrice + prices.shippingPrice + prices.taxPrice
   );
+
+  const orderCreate = useSelector((state: RootState) => state.order);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+    //eslint-disable-next-line
+  }, [history, success]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -129,6 +139,9 @@ const PlaceOrderScreen = () => {
                   <Col>Total</Col>
                   <Col>${prices.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant="danger">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

@@ -18,9 +18,11 @@ interface MatchParams {
   id: string;
 }
 
-interface Props extends RouteComponentProps<MatchParams> {}
-
-function CartScreen({ match, location, history }: Props) {
+function CartScreen({
+  match,
+  location,
+  history,
+}: RouteComponentProps<MatchParams>) {
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   console.log(qty);

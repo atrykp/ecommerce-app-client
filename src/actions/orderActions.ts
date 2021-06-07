@@ -25,7 +25,7 @@ export const createOrder =
       };
 
       const { data } = await axios.post(
-        `http://localhost:5000/api/users/orders`,
+        `http://localhost:5000/api/orders`,
         order,
         config
       );
@@ -34,16 +34,9 @@ export const createOrder =
         type: ActionType.ORDER_CREATE_SUCCESS,
         payload: data,
       });
-
-      dispatch({
-        type: ActionType.ORDER_CREATE_FAIL,
-        payload: data,
-      });
-
-      localStorage.setItem("userInfo", JSON.stringify(data));
     } catch (error) {
       dispatch({
-        type: ActionType.USER_UPDATE_PROFILE_FAIL,
+        type: ActionType.ORDER_CREATE_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

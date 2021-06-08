@@ -46,3 +46,19 @@ export const orderReducer = (
       return state;
   }
 };
+
+export const orderDetailsReducer = (
+  state: { orderItems: IOrder[]; shippingAddress: IShippingAddress },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.ORDER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case ActionType.ORDER_DETAILS_SUCCESS:
+      return { ...state, loading: false, order: action.payload };
+    case ActionType.ORDER_DETAILS_FAIL:
+      return { error: action.payload, loading: false };
+    default:
+      return state;
+  }
+};

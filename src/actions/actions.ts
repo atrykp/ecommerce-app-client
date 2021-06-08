@@ -113,6 +113,18 @@ export interface OrderCreaterFailAction {
   type: ActionType.ORDER_CREATE_FAIL;
   payload: Error;
 }
+export interface OrderDetailsRequestAction {
+  type: ActionType.ORDER_DETAILS_REQUEST;
+}
+export interface OrderDetailsSuccessAction {
+  type: ActionType.ORDER_DETAILS_SUCCESS;
+  payload: IOrder;
+}
+
+export interface OrderDetailsFailAction {
+  type: ActionType.ORDER_DETAILS_FAIL;
+  payload: Error;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -141,4 +153,7 @@ export type Action =
   | SavePaymentMethodAction
   | OrderCreaterRequestAction
   | OrderCreaterSuccessAction
-  | OrderCreaterFailAction;
+  | OrderCreaterFailAction
+  | OrderDetailsRequestAction
+  | OrderDetailsSuccessAction
+  | OrderDetailsFailAction;

@@ -47,8 +47,18 @@ export const orderReducer = (
   }
 };
 
+interface IOrderDetails {
+  loading: boolean;
+  orderItems: IOrder[];
+  shippingAddress: IShippingAddress;
+}
+
 export const orderDetailsReducer = (
-  state: { orderItems: IOrder[]; shippingAddress: IShippingAddress },
+  state: IOrderDetails = {
+    loading: true,
+    orderItems: [],
+    shippingAddress: { address: "", city: "", postalCode: "", country: "" },
+  },
   action: Action
 ) => {
   switch (action.type) {

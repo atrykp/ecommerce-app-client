@@ -1,9 +1,20 @@
 import { Action } from "../actions/actions";
 import { ActionType } from "../actions/actionTypes";
 import { CartItem, IShippingAddress } from "./cartReducer";
+import { IUser } from "./userReducers";
 
+interface UserInfo {
+  name: string;
+  email: string;
+  _id: string;
+}
 export interface IOrder {
   _id?: string;
+  user?: UserInfo;
+  isPaid?: boolean;
+  paidAt?: Date | null;
+  isDelivered?: boolean;
+  deliveredAt?: Date | null;
   orderItems: CartItem[];
   shippingAddress: IShippingAddress;
   paymentMethod: string;
@@ -24,6 +35,11 @@ export const orderReducer = (
   state: IOrderReducer = {
     order: {
       _id: "",
+      user: { name: "", _id: "", email: "" },
+      isPaid: false,
+      paidAt: null,
+      isDelivered: false,
+      deliveredAt: null,
       orderItems: [],
       shippingAddress: { address: "", city: "", postalCode: "", country: "" },
       paymentMethod: "",

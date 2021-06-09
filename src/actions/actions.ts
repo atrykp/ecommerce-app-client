@@ -125,6 +125,20 @@ export interface OrderDetailsFailAction {
   type: ActionType.ORDER_DETAILS_FAIL;
   payload: Error;
 }
+export interface OrderPayRequestAction {
+  type: ActionType.ORDER_PAY_REQUEST;
+}
+export interface OrderPaySuccessAction {
+  type: ActionType.ORDER_PAY_SUCCESS;
+}
+
+export interface OrderPayFailAction {
+  type: ActionType.ORDER_PAY_FAIL;
+  payload: Error;
+}
+export interface OrderPayResetAction {
+  type: ActionType.ORDER_PAY_RESET;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -156,4 +170,8 @@ export type Action =
   | OrderCreaterFailAction
   | OrderDetailsRequestAction
   | OrderDetailsSuccessAction
-  | OrderDetailsFailAction;
+  | OrderDetailsFailAction
+  | OrderPayRequestAction
+  | OrderPaySuccessAction
+  | OrderPayFailAction
+  | OrderPayResetAction;

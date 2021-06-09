@@ -82,3 +82,49 @@ export const getOrderById =
       });
     }
   };
+
+interface IPaymentResult {
+  id: string;
+  status: boolean;
+  update_time: Date;
+  email_address: string;
+}
+
+export const payOrder =
+  (orderId: string, paymentResult: IPaymentResult) =>
+  async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    try {
+      dispatch({
+        type: ActionType.ORDER_PAY_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.put(
+        `http://localhost:5000/api/orders/${orderId}/pay`,
+        paymentResult,
+        config
+      );
+
+      dispatch({
+        type: ActionType.ORDER_PAY_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({
+        type: ActionType.ORDER_PAY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

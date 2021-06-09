@@ -20,8 +20,10 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
   const { order, loading, error } = orderDetails;
 
   useEffect(() => {
-    dispatch(getOrderById(orderId));
-  }, []);
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderById(orderId));
+    }
+  }, [order, orderId, dispatch]);
 
   const itemsPrice = order?.orderItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)

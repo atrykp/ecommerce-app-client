@@ -1,12 +1,18 @@
 import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 import { useEffect, useState } from "react";
 import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { getOrderById } from "../actions/orderActions";
+import {
+  getOrderById,
+  IPaymentResult,
+  payOrder,
+} from "../actions/orderActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { RootState } from "../store";
+import { ActionType } from "../actions/actionTypes";
 
 interface IMatch {
   id: string;
@@ -21,8 +27,9 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
 
   const orderDetails = useSelector((state: RootState) => state.order);
   const { order, loading, error } = orderDetails;
-  const orderPay = useSelector((state: RootState) => state.order);
+  const orderPay = useSelector((state: RootState) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+  console.log(successPay);
 
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -39,9 +46,8 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
       document.body.appendChild(script);
     };
 
-    if (!order || order._id !== orderId) {
-      console.log("jetstm");
-
+    if (!order || successPay) {
+      dispatch({ type: ActionType.ORDER_PAY_RESET });
       dispatch(getOrderById(orderId));
     } else if (!order.isPaid) {
       if (!(window as any).paypal) {
@@ -55,6 +61,11 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
   const itemsPrice = order?.orderItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)
     .toFixed(2);
+
+  const successPaymentHandler = (paymentResult: IPaymentResult) => {
+    console.log(paymentResult);
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return loading ? (
     <Loader />
@@ -167,6 +178,19 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {!order.isPaid && (
+                <ListGroup.Item>
+                  {loadingPay && <Loader />}
+                  {!sdkReaedy ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

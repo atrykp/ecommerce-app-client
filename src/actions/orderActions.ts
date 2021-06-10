@@ -83,7 +83,7 @@ export const getOrderById =
     }
   };
 
-interface IPaymentResult {
+export interface IPaymentResult {
   id: string;
   status: boolean;
   update_time: Date;
@@ -117,6 +117,7 @@ export const payOrder =
 
       dispatch({
         type: ActionType.ORDER_PAY_SUCCESS,
+        payload: data,
       });
     } catch (error) {
       dispatch({

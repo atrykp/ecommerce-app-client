@@ -3,6 +3,7 @@ import { ProductItem } from "../screens/HomeScreen";
 import { IUser } from "../reducers/userReducers";
 import { ActionType } from "./actionTypes";
 import { IOrder } from "../reducers/orderReducer";
+import { IPaymentResult } from "./orderActions";
 
 export interface ProductListRequestAction {
   type: ActionType.PRODUCT_LIST_REQUEST;
@@ -130,6 +131,7 @@ export interface OrderPayRequestAction {
 }
 export interface OrderPaySuccessAction {
   type: ActionType.ORDER_PAY_SUCCESS;
+  payload: IPaymentResult;
 }
 
 export interface OrderPayFailAction {

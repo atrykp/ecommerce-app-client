@@ -25,7 +25,6 @@ function CartScreen({
 }: RouteComponentProps<MatchParams>) {
   const productId = match.params.id;
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-  console.log(qty);
 
   const dispatch = useDispatch();
 

@@ -14,6 +14,7 @@ export interface IOrder {
   paidAt?: Date | null;
   isDelivered?: boolean;
   deliveredAt?: Date | null;
+  createdAt?: Date | null;
   orderItems: CartItem[];
   shippingAddress: IShippingAddress;
   paymentMethod: string;
@@ -39,6 +40,7 @@ export const orderReducer = (
       paidAt: null,
       isDelivered: false,
       deliveredAt: null,
+      createdAt: null,
       orderItems: [],
       shippingAddress: { address: "", city: "", postalCode: "", country: "" },
       paymentMethod: "",

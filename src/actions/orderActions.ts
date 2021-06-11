@@ -130,7 +130,7 @@ export const payOrder =
     }
   };
 
-export const listMyOrders =
+export const userOrderListAction =
   () => async (dispatch: Dispatch<Action>, getState: () => RootState) => {
     try {
       dispatch({

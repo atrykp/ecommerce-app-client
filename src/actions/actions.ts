@@ -81,6 +81,9 @@ export interface UserReDetailsFailAction {
   type: ActionType.USER_DETAILS_FAIL;
   payload: Error;
 }
+export interface UserDetailsReserAction {
+  type: ActionType.USER_DETAILS_RESET;
+}
 export interface UserUpdateRequestAction {
   type: ActionType.USER_UPDATE_PROFILE_REQUEST;
 }
@@ -154,6 +157,9 @@ export interface userOrderListFailAction {
   type: ActionType.USER_ORDER_LIST_FAIL;
   payload: Error;
 }
+export interface userOrderListResetAction {
+  type: ActionType.USER_ORDER_LIST_RESET;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -192,4 +198,6 @@ export type Action =
   | OrderPayResetAction
   | userOrderListRequestAction
   | userOrderListSuccessAction
-  | userOrderListFailAction;
+  | userOrderListFailAction
+  | userOrderListResetAction
+  | UserDetailsReserAction;

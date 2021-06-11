@@ -129,6 +129,8 @@ export const userOrderListReducer = (
       return { loading: false, orders: action.payload };
     case ActionType.USER_ORDER_LIST_FAIL:
       return { error: action.payload, loading: false };
+    case ActionType.USER_ORDER_LIST_RESET:
+      return { orders: [] };
     default:
       return state;
   }

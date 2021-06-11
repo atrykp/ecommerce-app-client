@@ -110,3 +110,24 @@ export const orderPayReducer = (
       return state;
   }
 };
+
+export interface IUserOrderListReducer {
+  orders: IOrder[];
+  loading?: boolean;
+  error?: Error;
+}
+export const userOrderListReducer = (
+  state: IUserOrderListReducer = { orders: [] },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.USER_ORDER_LIST_REQUEST:
+      return { loading: true };
+    case ActionType.USER_ORDER_LIST_SUCCESS:
+      return { loading: false, orders: action.payload };
+    case ActionType.USER_ORDER_LIST_FAIL:
+      return { error: action.payload, loading: false };
+    default:
+      return state;
+  }
+};

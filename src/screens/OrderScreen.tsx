@@ -25,11 +25,12 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
 
   const dispatch = useDispatch();
 
-  const orderDetails = useSelector((state: RootState) => state.order);
+  const orderDetails = useSelector((state: RootState) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  console.log(orderDetails);
+
   const orderPay = useSelector((state: RootState) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
-  console.log(successPay);
 
   useEffect(() => {
     const addPayPalScript = async () => {
@@ -49,6 +50,7 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
     if (!order || successPay) {
       dispatch({ type: ActionType.ORDER_PAY_RESET });
       dispatch(getOrderById(orderId));
+      console.log(orderId);
     } else if (!order.isPaid) {
       if (!(window as any).paypal) {
         addPayPalScript();
@@ -56,7 +58,7 @@ const OrderScreen = ({ match }: RouteComponentProps<IMatch>) => {
         setSdkReady(true);
       }
     }
-  }, [order, orderId, dispatch]);
+  }, [order, orderId, dispatch, successPay]);
 
   const itemsPrice = order?.orderItems
     .reduce((acc, item) => acc + item.price * item.qty, 0)

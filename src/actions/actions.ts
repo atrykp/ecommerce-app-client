@@ -142,6 +142,19 @@ export interface OrderPayResetAction {
   type: ActionType.ORDER_PAY_RESET;
 }
 
+export interface userOrderListRequestAction {
+  type: ActionType.USER_ORDER_LIST_REQUEST;
+}
+export interface userOrderListSuccessAction {
+  type: ActionType.USER_ORDER_LIST_SUCCESS;
+  payload: IPaymentResult;
+}
+
+export interface userOrderListFailAction {
+  type: ActionType.USER_ORDER_LIST_FAIL;
+  payload: Error;
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
@@ -176,4 +189,7 @@ export type Action =
   | OrderPayRequestAction
   | OrderPaySuccessAction
   | OrderPayFailAction
-  | OrderPayResetAction;
+  | OrderPayResetAction
+  | userOrderListRequestAction
+  | userOrderListSuccessAction
+  | userOrderListFailAction;

@@ -161,6 +161,19 @@ export interface userOrderListResetAction {
   type: ActionType.USER_ORDER_LIST_RESET;
 }
 
+export interface userListRequestAction {
+  type: ActionType.USER_LIST_REQUEST;
+}
+export interface userListSuccessAction {
+  type: ActionType.USER_LIST_SUCCESS;
+  payload: IUser[];
+}
+
+export interface userListFailAction {
+  type: ActionType.USER_LIST_FAIL;
+  payload: Error;
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
@@ -200,4 +213,7 @@ export type Action =
   | userOrderListSuccessAction
   | userOrderListFailAction
   | userOrderListResetAction
-  | UserDetailsReserAction;
+  | UserDetailsReserAction
+  | userListRequestAction
+  | userListSuccessAction
+  | userListFailAction;

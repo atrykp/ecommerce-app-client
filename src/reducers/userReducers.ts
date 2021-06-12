@@ -121,10 +121,14 @@ export const userUpdateProfileReducer = (
 
 export interface IUserListReducer {
   users: IUser[];
+  loading?: boolean;
+  error: Error | null;
 }
 
 export const userListReducer = (
   state: IUserListReducer = {
+    loading: false,
+    error: null,
     users: [],
   },
   action: Action

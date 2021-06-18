@@ -177,6 +177,18 @@ export interface userListResetAction {
   type: ActionType.USER_LIST_RESET;
 }
 
+export interface userDeleteRequestAction {
+  type: ActionType.USER_DELETE_REQUEST;
+}
+export interface userDeleteSuccessAction {
+  type: ActionType.USER_DELETE_SUCCESS;
+}
+
+export interface userDeleteFailAction {
+  type: ActionType.USER_DELETE_FAIL;
+  payload: Error;
+}
+
 export type Action =
   | ProductListRequestAction
   | ProductListSuccessAction
@@ -220,4 +232,7 @@ export type Action =
   | userListRequestAction
   | userListSuccessAction
   | userListFailAction
-  | userListResetAction;
+  | userListResetAction
+  | userDeleteRequestAction
+  | userDeleteSuccessAction
+  | userDeleteFailAction;

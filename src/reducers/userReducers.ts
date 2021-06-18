@@ -150,3 +150,25 @@ export const userListReducer = (
       return state;
   }
 };
+
+export interface IUserDeleteReducer {
+  loading: boolean;
+  success: boolean;
+  error: Error | null;
+}
+
+export const userDeleteReducer = (
+  state: IUserDeleteReducer = { loading: false, success: false, error: null },
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.USER_DELETE_REQUEST:
+      return { ...state, loading: true };
+    case ActionType.USER_DELETE_SUCCESS:
+      return { ...state, loading: false, success: true };
+    case ActionType.USER_DELETE_FAIL:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};

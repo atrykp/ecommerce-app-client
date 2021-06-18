@@ -203,3 +203,33 @@ export const listUsers =
       });
     }
   };
+
+export const userDeleteAction =
+  (id: string) =>
+  async (dispatch: Dispatch<Action>, getState: () => RootState) => {
+    try {
+      dispatch({ type: ActionType.USER_DELETE_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.delete(
+        `http://localhost:5000/api/users/${id}`,
+        config
+      );
+
+      dispatch({ type: ActionType.USER_DELETE_SUCCESS });
+    } catch (error) {
+      dispatch({
+        type: ActionType.USER_DELETE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };

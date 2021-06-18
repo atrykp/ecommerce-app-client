@@ -10,9 +10,11 @@ import {
 import { cartReducer, ICartState } from "./reducers/cartReducer";
 import {
   IUpdateProfile,
+  IUserDeleteReducer,
   IUserDetailState,
   IUserListReducer,
   IUserState,
+  userDeleteReducer,
   userDetailsReducer,
   userListReducer,
   userLoginReducer,
@@ -42,6 +44,7 @@ export interface RootState {
   orderPay: IOrderPayReducer;
   userOrderList: IUserOrderListReducer;
   userList: IUserListReducer;
+  userDelete: IUserDeleteReducer;
 }
 
 const reducer = combineReducers({
@@ -57,6 +60,7 @@ const reducer = combineReducers({
   orderPay: orderPayReducer,
   userOrderList: userOrderListReducer,
   userList: userListReducer,
+  userDelete: userDeleteReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

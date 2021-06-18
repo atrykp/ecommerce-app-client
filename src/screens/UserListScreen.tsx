@@ -7,14 +7,24 @@ import Message from "../components/Message";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 const UserListScreen = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
+
   const userList = useSelector((state: RootState) => state.userList);
   const { loading, error, users } = userList;
 
+  const userLogin = useSelector((state: RootState) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
-    dispatch(listUsers());
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      history.push("/login");
+    }
   }, [dispatch]);
 
   const deleteHandler = (id: string) => {

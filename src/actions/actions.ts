@@ -173,6 +173,9 @@ export interface userListFailAction {
   type: ActionType.USER_LIST_FAIL;
   payload: Error;
 }
+export interface userListResetAction {
+  type: ActionType.USER_LIST_RESET;
+}
 
 export type Action =
   | ProductListRequestAction
@@ -216,4 +219,5 @@ export type Action =
   | UserDetailsReserAction
   | userListRequestAction
   | userListSuccessAction
-  | userListFailAction;
+  | userListFailAction
+  | userListResetAction;

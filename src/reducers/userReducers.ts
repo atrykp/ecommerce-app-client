@@ -140,6 +140,12 @@ export const userListReducer = (
       return { loading: false, users: action.payload };
     case ActionType.USER_LIST_FAIL:
       return { loading: false, error: action.payload };
+    case ActionType.USER_LIST_RESET:
+      return {
+        loading: false,
+        error: null,
+        users: [],
+      };
     default:
       return state;
   }

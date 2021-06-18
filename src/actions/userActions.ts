@@ -43,6 +43,7 @@ export const logout = () => (dispatch: Dispatch<Action>) => {
   dispatch({ type: ActionType.USER_LOGOUT, payload: {} });
   dispatch({ type: ActionType.USER_DETAILS_RESET });
   dispatch({ type: ActionType.USER_ORDER_LIST_RESET });
+  dispatch({ type: ActionType.USER_LIST_RESET });
 };
 
 export const register =

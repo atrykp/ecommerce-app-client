@@ -28,7 +28,7 @@ const UserListScreen = () => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, successDelete]);
+  }, [dispatch, history, successDelete, userInfo]);
 
   const deleteHandler = (id: string) => {
     if (window.confirm("Are you sure")) {
@@ -72,7 +72,7 @@ const UserListScreen = () => {
                 </td>
 
                 <td>
-                  <LinkContainer to={`/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button className="btn-sm" variant="light">
                       <i className="fas fa-edit"></i>
                     </Button>

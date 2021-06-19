@@ -217,10 +217,7 @@ export const userDeleteAction =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
-      const { data } = await axios.delete(
-        `http://localhost:5000/api/users/${id}`,
-        config
-      );
+      await axios.delete(`http://localhost:5000/api/users/${id}`, config);
 
       dispatch({ type: ActionType.USER_DELETE_SUCCESS });
     } catch (error) {
